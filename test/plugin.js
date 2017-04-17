@@ -14,6 +14,7 @@ var outputFile = path.resolve(outputFolder, 'stats.json')
 
 var options = {
   chunkModules: true,
+  performance: false,
   exclude: [/node_modules[\\/]/]
 }
 
@@ -89,6 +90,9 @@ describe('StatsWebpackPlugin', function () {
           expected.assets[i].size = 0
           break
         }
+      }
+      for (i = 0, l = expected.chunks.length; i < l; ++i) {
+        delete expected.chunks[i].recorded
       }
 
       expect(actual).to.deep.equal(expected)
